@@ -17,11 +17,9 @@ cd easyrsa
 EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $1 nopass
 go_back
 
+cp template/client.txt clients/$1.ovpn
 
-DATA=$(cat template/client.txt)
-DATA=${DATA//__REMOTE_ADDRESS__/$PUBLIC_IP}
-
-echo $DATA > clients/$1.ovpn
+sed -i "s/__REMOTE_ADDRESS__/$PUBLIC_IP/g" clients/$1.ovpn
 
 echo "<ca>" >> clients/$1.ovpn
 cat easyrsa/pki/ca.crt >> clients/$1.ovpn

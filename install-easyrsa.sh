@@ -37,6 +37,7 @@ cp -f \
     pki/crl.pem \
     /etc/openvpn
 
+go_back
 chown nobody:nogroup /etc/openvpn/crl.pem
-
 openvpn --genkey --secret /etc/openvpn/ta.key
+cp template/dh.pem /etc/openvpn/dh.pem
