@@ -3,7 +3,7 @@
 source config.sh
 
 go_back () {
-    cd "$INSTALL_DIRECTORY"
+    cd "$INSTALL_DIR"
 }
 
 if [[ "$EUID" -ne 0 ]]
