@@ -7,6 +7,5 @@ rm -rf openvpn-install
 git clone "$REPO"
 cd openvpn-install
 echo $(pwd) > .path
-cd ..
-cd openvpn-install
 chmod +x *
+exit
