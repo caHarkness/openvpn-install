@@ -2,9 +2,11 @@
 
 export REPO="https://github.com/caHarkness/openvpn-install.git"
 
-cd ..                   && sleep 1
-rm -rf openvpn-install  && sleep 1
-git clone "$REPO"       && sleep 1
-cd openvpn-install      && sleep 1
-echo $(pwd) > .path     && sleep 1
+cd ..
+rm -rf openvpn-install
+git clone "$REPO"
+cd openvpn-install
+echo $(pwd) > .path
+cd ..
+cd openvpn-install
 chmod +x *
