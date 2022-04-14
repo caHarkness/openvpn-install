@@ -18,7 +18,7 @@ EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $1 nopass
 go_back
 
 
-DATA=$(<template/client.txt)
+DATA=$(cat template/client.txt)
 DATA=${DATA//__REMOTE_ADDRESS__/$PUBLIC_IP}
 
 echo $DATA > clients/$1.ovpn
