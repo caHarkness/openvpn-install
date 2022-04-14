@@ -1,9 +1,9 @@
 client
 dev tun
-proto __PROTOCOL__
+proto upd
 sndbuf 0
 rcvbuf 0
-remote __PUBLIC_IP__ __PORT__
+remote __REMOTE_ADDRESS__ 1194
 resolv-retry infinite
 nobind
 persist-key
@@ -11,6 +11,10 @@ persist-tun
 remote-cert-tls server
 auth SHA512
 cipher AES-256-CBC
-setenv opt block-outside-dns
+
+# Disable the traffic rerouting
+### ignore-unknown-option block-outside-dns
+### block-outside-dns
+
 key-direction 1
 verb 3
