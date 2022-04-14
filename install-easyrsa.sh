@@ -24,7 +24,7 @@ EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-server-full server nopass
 # EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full default nopass
 
 go_back
-./new-client default
+./new-client.sh default
 cd easyrsa
 
 EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
