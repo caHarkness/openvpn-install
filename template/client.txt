@@ -1,6 +1,6 @@
 client
 dev tun
-proto upd
+proto udp
 sndbuf 0
 rcvbuf 0
 remote __REMOTE_ADDRESS__ 1194
