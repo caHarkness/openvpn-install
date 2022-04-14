@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export INSTALL_DIR=$(<.path)
+
 export DNS_SERVER_1="8.8.8.8"
 
 export DNS_SERVER_2="8.8.4.4"
