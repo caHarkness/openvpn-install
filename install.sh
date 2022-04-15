@@ -5,6 +5,7 @@ source common.sh
 apt-get update
 apt-get install openvpn iptables openssl ca-certificates -y
 
+# Download and install EasyRSA
 export EASYRSA_DOWNLOAD="https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.5/EasyRSA-nix-3.0.5.tgz"
 
 curl -Lo ./download.tgz "$EASYRSA_DOWNLOAD"
@@ -41,3 +42,28 @@ go_back
 chown nobody:nogroup /etc/openvpn/crl.pem
 openvpn --genkey --secret /etc/openvpn/ta.key
 cp template/dh.pem /etc/openvpn/dh.pem
+
+# Enable port forwarding
+if [[ -d "/etc/sysctl.d" ]]
+then
+    cp template/30-openvpn-forward.conf /etc/sysctl.d
+    echo 1 > /proc/sys/net/ipv4/ip_forward
+else
+    echo "WARNING: /etc/sysctl.d is not a directory, is this a Debian distribution?"
+    exit
+fi
+
+# Install port forwarding service
+if [[ -d "/etc/systemd/system" ]]
+then
+    echo "Installing service..."
+
+    cp template/openvpn-iptables.service /etc/systemd/system
+    systemctl enable --now openvpn-iptables.service
+    systemctl restart openvpn@server.service
+
+    echo "Done installing service."
+else
+    echo "WARNING: /etc/systemd/system is not a directory, is this a Debian distribution?"
+    exit
+fi
