@@ -2,6 +2,10 @@
 
 export INSTALL_DIR=$(<.path)
 
+export PROTOCOL="tcp"
+
+export PORT="1194"
+
 export DNS_SERVER_1="8.8.8.8"
 
 export DNS_SERVER_2="8.8.4.4"

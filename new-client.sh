@@ -19,7 +19,9 @@ go_back
 
 cp template/client.txt clients/$1.ovpn
 
+sed -i "s/__PROTOCOL__/$PROTOCOL/g" clients/$1.ovpn
 sed -i "s/__REMOTE_ADDRESS__/$PUBLIC_IP/g" clients/$1.ovpn
+sed -i "s/__PORT__/$PORT/g" clients/$1.ovpn
 
 echo "<ca>" >> clients/$1.ovpn
 cat easyrsa/pki/ca.crt >> clients/$1.ovpn

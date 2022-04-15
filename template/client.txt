@@ -1,9 +1,9 @@
 client
 dev tun
-proto udp
+proto __PROTOCOL__
 sndbuf 0
 rcvbuf 0
-remote __REMOTE_ADDRESS__ 1194
+remote __REMOTE_ADDRESS__ __PORT__
 resolv-retry infinite
 nobind
 persist-key

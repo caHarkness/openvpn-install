@@ -41,6 +41,10 @@ openvpn --genkey --secret /etc/openvpn/ta.key
 cp template/dh.pem /etc/openvpn/dh.pem
 cp template/server.conf /etc/openvpn
 
+# Make sure the server.conf file is configured properly
+sed -i "s/__PORT__/$PORT/g" /etc/openvpn/server.conf 
+sed -i "s/__PROTOCOL__/$PROTOCOL/g" /etc/openvpn/server.conf 
+
 # Enable port forwarding
 if [[ -d "/etc/sysctl.d" ]]
 then
