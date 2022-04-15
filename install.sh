@@ -42,6 +42,7 @@ go_back
 chown nobody:nogroup /etc/openvpn/crl.pem
 openvpn --genkey --secret /etc/openvpn/ta.key
 cp template/dh.pem /etc/openvpn/dh.pem
+cp template/server.conf /etc/openvpn/server
 
 # Enable port forwarding
 if [[ -d "/etc/sysctl.d" ]]
