@@ -59,6 +59,9 @@ then
     echo "Installing service..."
 
     cp template/openvpn-iptables.service /etc/systemd/system
+
+    sed -i "s/__PUBLIC_IP__/$PUBLIC_IP/g" /etc/systemd/system/openvpn-iptables.service
+
     systemctl enable --now openvpn-iptables.service
     systemctl restart openvpn@server.service
 

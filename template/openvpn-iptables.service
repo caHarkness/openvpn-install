@@ -2,12 +2,12 @@
 Before=network.target
 [Service]
 Type=oneshot
-ExecStart=/sbin/iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-ExecStart=/sbin/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
+ExecStart=/sbin/iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to __PUBLIC_IP__
+ExecStart=/sbin/iptables -I INPUT -p udp --dport 1194 -j ACCEPT
 ExecStart=/sbin/iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT
 ExecStart=/sbin/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-ExecStop=/sbin/iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-ExecStop=/sbin/iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
+ExecStop=/sbin/iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to __PUBLIC_IP__
+ExecStop=/sbin/iptables -D INPUT -p udp --dport 1194 -j ACCEPT
 ExecStop=/sbin/iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
 ExecStop=/sbin/iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 RemainAfterExit=yes
