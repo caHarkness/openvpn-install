@@ -22,12 +22,7 @@ cd easyrsa
 ./easyrsa --batch build-ca nopass
 
 EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-server-full server nopass
-# EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full default nopass
-
-go_back
-./new-client.sh default
-cd easyrsa
-
+EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full default nopass
 EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
 
 cp -f \
@@ -40,7 +35,9 @@ cp -f \
 
 go_back
 chown nobody:nogroup /etc/openvpn/crl.pem
+
 openvpn --genkey --secret /etc/openvpn/ta.key
+
 cp template/dh.pem /etc/openvpn/dh.pem
 cp template/server.conf /etc/openvpn
 
