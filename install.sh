@@ -46,7 +46,7 @@ sed -i "s/__PORT__/$PORT/g" /etc/openvpn/server.conf
 sed -i "s/__PROTOCOL__/$PROTOCOL/g" /etc/openvpn/server.conf 
 
 # Enable port forwarding
-if [[ -d "/etc/sysctl.d" ]]
+if [[ -d /etc/sysctl.d ]]
 then
     cp template/30-openvpn-forward.conf /etc/sysctl.d
     echo 1 > /proc/sys/net/ipv4/ip_forward
