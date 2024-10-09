@@ -3,7 +3,7 @@
 source config.sh
 
 go_back () {
-    cd "$INSTALL_DIR"
+    cd "${INSTALL_DIR}"
 }
 
 prompt_user () {

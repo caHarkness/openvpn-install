@@ -1,18 +1,31 @@
-## openvpn-install
-OpenVPN [road warrior](http://en.wikipedia.org/wiki/Road_warrior_%28computing%29) installer for Debian, Ubuntu and CentOS.
+###### openvpn-install
 
-This script will let you setup your own VPN server in no more than a minute, even if you haven't used OpenVPN before. It has been designed to be as unobtrusive and universal as possible.
+Forked from [openvpn-install](https://github.com/Nyr/openvpn-install), broken apart, and heavily modified to make the individual components easier to understand. Tested and verified to work with Debian 12 only.
 
-### Installation
-Run the script and follow the assistant:
+---
 
-`wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh`
+###### Procedure
 
-Once it ends, you can run it again to add more users, remove some of them or even completely uninstall OpenVPN.
+1. Run `./install.sh` to install OpenVPN and the system configuration changes
 
-### I want to run my own VPN but don't have a server for that
-You can get a VPS from just $1/month at [VirMach](https://billing.virmach.com/aff.php?aff=4109&url=billing.virmach.com/cart.php?gid=1).
+2. Run `./new-client.sh mynewclient` to create a profile
 
-### Donations
+3. Copy `clients/mynewclient.ovpn` and give to a single, trusted device
 
-If you want to show your appreciation, you can donate via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VBAYDL34Z7J6L) or [cryptocurrency](https://pastebin.com/raw/M2JJpQpC). Thanks!
+---
+
+###### Static Client IPs
+
+1. Have `mynewclient.ovpn` connect once
+
+2. Stop OpenVPN via `systemctl stop openvpn`
+
+3. Open `/etc/openvpn/ipp.txt` in nano
+
+4. Modify the file to contain the client and its ip, e.g.
+
+        mynewclient,10.8.0.100
+
+5. Start OpenVPN via `systemctl start openvpn`
+
+6. Have `mynewclient` connect again
